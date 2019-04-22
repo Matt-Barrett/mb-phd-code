@@ -1,0 +1,19 @@
+function pO2_0 = calculate_p0(pO2,wMean,wPO2)
+
+% pO2 = [pO2_a pO2_c pO2_v pO2_t]
+% wMean = scalar
+% wPO2 = [wPO2_a wPO2_c wPO2_v]
+
+% Calculate the p0
+pO2_0 = (pO2(:,4) - wMean.*sum(...
+            bsxfun(@times,wPO2,pO2(:,1:3)),2))./...
+        (1-wMean);
+    
+% % This syntax is equivalent, but doesn't use bsxfun.
+% pO2_0 = (pO2(:,end) - wMean.*(...
+%             wPO2(1).*pO2(:,1) + ...
+%             wPO2(2).*pO2(:,2) + ...
+%             wPO2(3).*PO2(:,3)))./ ...
+%         (1-wMean);
+    
+end
